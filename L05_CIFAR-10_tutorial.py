@@ -116,6 +116,8 @@ if __name__ == "__main__":
                                                 running_loss / 2000))
                 running_loss = 0.0
 
+            break
+
     print('Finished Training')
 
     """

@@ -1,3 +1,9 @@
+"""
+1. Design your model using class
+2. Construct loss and optimizer (select from PyTorch API)
+3. Training cycle (forward, backward, update)
+"""
+
 import torch
 
 x_data = torch.tensor([[1.0], [2.0], [3.0]])
