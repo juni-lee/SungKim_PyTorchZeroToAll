@@ -46,10 +46,10 @@ if __name__ == "__main__":
         [torchvision.transforms.ToTensor(),
          torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-    trainset = torchvision.datasets.CIFAR10(root='./CIFAR10_data', train=True, download=True, transform=transform)
+    trainset = torchvision.datasets.CIFAR10(root='./data/CIFAR10_data', train=True, download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=4, shuffle=True)
 
-    testset = torchvision.datasets.CIFAR10(root='./CIFAR10_data', train=False, download=True, transform=transform)
+    testset = torchvision.datasets.CIFAR10(root='./data/CIFAR10_data', train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False)
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -149,10 +149,10 @@ if __name__ == "__main__":
         _, predicted = torch.max(outputs, 1)
     print('Predicted: ', ' '.join('%5s' % classes[predicted[j]] for j in range(4)))
 
-    correct = 0
-    total = 0
     net.eval()
     with torch.no_grad():
+        correct = 0
+        total = 0
         for data in testloader:
             images, labels = data
             outputs = net(images)
@@ -161,10 +161,10 @@ if __name__ == "__main__":
             correct = correct + (predicted == labels).sum().item()
     print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / total))
 
-    class_correct = list(0. for i in range(10))
-    class_total = list(0. for i in range(10))
     net.eval()
     with torch.no_grad():
+        class_correct = list(0. for i in range(10))
+        class_total = list(0. for i in range(10))
         for data in testloader:
             images, labels = data
             outputs = net(images)
@@ -176,4 +176,4 @@ if __name__ == "__main__":
                 class_total[label] = class_total[label] + 1
 
     for i in range(10):
-        print('Accuracy of %5s : %2d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
+        print('Accuracy of %5s : %3d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
