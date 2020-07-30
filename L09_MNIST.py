@@ -2,6 +2,7 @@ import torch
 import torchvision
 import time
 
+
 class Net(torch.nn.Module):
 
     def __init__(self):
@@ -20,6 +21,7 @@ class Net(torch.nn.Module):
         x = torch.nn.functional.relu(self.l4(x))
         return self.l5(x)
 
+
 def train(epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -35,6 +37,7 @@ def train(epoch):
                                                                                           len(train_loader.dataset),
                                                                                           100. * batch_idx / len(train_loader),
                                                                                           loss.item()))
+
 
 def test():
     model.eval()
@@ -53,7 +56,6 @@ def test():
         test_loss /= len(test_loader.dataset)
         print(f'{"=" * 44}\n'
               f'Test set: Average loss: {test_loss:.4f}, Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)')
-
 
 
 
